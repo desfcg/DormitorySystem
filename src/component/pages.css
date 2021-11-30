@@ -1,0 +1,23 @@
+.btn{
+    margin-left: 20px;
+}
+.put{
+    width: 200px;
+    margin-left: 10px;
+}
+.put-txt{
+    margin-left: 30px;
+}
+.txt{
+    height: 100px;
+}
+.addFrom{
+    width: 300px;
+    margin-bottom: 30px;
+    /* margin-left: 50px; */
+}
+.bel{
+    width:100px; 
+    float:left; 
+    text-align:right;
+}

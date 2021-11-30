@@ -1,0 +1,45 @@
+.logo {
+    float: left;
+    width: 120px;
+    height: 31px;
+    text-align: center;
+    line-height: 32px;
+    margin: 16px 24px 16px 0;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  .logo>span{
+    color: white;
+    font-size: 19px;
+  }
+  .ant-row-rtl #components-layout-demo-top-side-2 .logo {
+    float: right;
+    margin: 16px 0 16px 24px;
+  }
+  
+  .site-layout-background {
+    background: #fff;
+  }
+  .ant-avatar{
+    margin-right: 10px;
+    /* line-height: 32px; */
+    top: 15px;
+    float: right;
+  }
+  .ant-dropdown-trigger{
+    float: right;
+  }
+.underline{
+  width: 100%;
+  height: 50px;
+  border: 1px solid black;
+}
+.tit{
+  width: 100%;
+  height: 50px;
+  background-color: #cfcfcf;
+  line-height: 50px;
+  border-radius: 5px;
+}
+.tit>span{
+  margin-left: 20px;
+}
