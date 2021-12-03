@@ -30,8 +30,12 @@
   }
 .underline{
   width: 100%;
-  height: 50px;
-  border: 1px solid black;
+  height: 43px;
+  border: 2px solid #bcbcbc;
+  background-color: #ffffff;
+  box-shadow: 5px 5px 5px #ababab;
+  margin-bottom: 5px;
+  margin-left: 5px;
 }
 .tit{
   width: 100%;

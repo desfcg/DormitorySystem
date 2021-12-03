@@ -306,7 +306,7 @@ delAdmin=(key)=>{
       <Fragment>
         <Adm showModal={this.showModal} Search={this.Search} admin={this.admin} ></Adm>
         <div>
-          <Table columns={columns} dataSource={this.state.admin} size="middle" />
+          <Table pagination={{defaultPageSize:5}} columns={columns} dataSource={this.state.admin} size="middle" />
         </div>
         <Modal
           width="500px"

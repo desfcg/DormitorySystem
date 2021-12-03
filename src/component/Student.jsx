@@ -582,6 +582,7 @@ export default class Student extends Component {
           dataSource={this.state.allStudent}
           size="middle"
           position="bottomCenter"
+          pagination={{defaultPageSize:5}}
         />
 
         <Modal

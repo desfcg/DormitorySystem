@@ -181,6 +181,10 @@ this.dormitory()
 },500)
 }
 deldorm=(key)=>{
+  // if(key.num>=1){
+  //   message.warning('该宿舍还有学生入住，不能删除！')
+  //   return
+  // }
   let data={id:key.id}  
   let url=`/api/dorm/deldorm`
   fetch(url,{
@@ -191,7 +195,12 @@ deldorm=(key)=>{
       }
   }).then(res=>res.json())
   .then((res)=>{
-    message.success(res.msg);
+    if(res.code===200){
+     message.success(res.msg); 
+    }else{
+      message.error(res.msg)
+    }
+    
   }).catch(err=>{
       console.log(err)
   })
@@ -299,7 +308,7 @@ deptdorm=(key)=>{
       <Fragment>
         <Dorm showModal={this.showModal} Search={this.Search} dormitory={this.dormitory}></Dorm>
         <div>
-          <Table columns={columns} dataSource={this.state.dormitory} size="middle" />
+          <Table pagination={{defaultPageSize:5}} columns={columns} dataSource={this.state.dormitory} size="middle" />
         </div>
         <Modal
           width="500px"

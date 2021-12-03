@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink,withRouter } from 'react-router-dom';
-import { Layout, Menu,Avatar,Dropdown ,notification } from 'antd';
+import { Layout, Menu,Avatar,Dropdown ,notification,Tabs, Button } from 'antd';
 import menus from '../router/Menus.js';
 import {clearSessionStorage} from '../Session/Session'
 import { MyCtx } from '../store/MyContext';
@@ -15,7 +15,7 @@ import {
 import './Main.css'
 // const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
-
+const { TabPane } = Tabs;
 const icon={
   MehOutlined:(<MehOutlined/>),
   MacCommandOutlined:(<MacCommandOutlined/>),
@@ -24,19 +24,21 @@ const icon={
   NotificationOutlined:(<NotificationOutlined/>),
 }
 let tag=[]
+
  class Main extends Component {
    constructor(){
      super()
+     this.newTabIndex = 0;
+     const panes = new Array(1).fill(null).map((_, index) => {
+       const id = String(index + 1);
+       return { title: `公告主页`, content: `Content of Tab Pane ${id}`, key: id,path:'/main/notice' };
+     });
      this.state={
-        Tag:{
-          noticeTag:false,
-          dormitoryTag:false,
-          studentTag:false,
-          announcementTag:false,
-          adminTag:false
-        }
+      activeKey: panes[0].key,
+      panes,
      }
    }
+   
    componentDidMount(){
     if(this.context.userInfo.stuDormId){
       if(this.context.userInfo.dormType===2){
@@ -55,6 +57,42 @@ let tag=[]
         Tag:tag 
      })
    }
+
+   onChange = activeKey => {
+    this.setState({ activeKey });
+    // this.props.history.push('/main/admin')
+  };
+
+  onEdit = (targetKey, action) => {
+    this[action](targetKey);
+  };
+
+  add = (title,path) => {
+    const { panes } = this.state;
+    const activeKey = `newTab${this.newTabIndex++}`;
+    panes.push({ title: `${title}`, content: 'New Tab Pane', key: activeKey,path:path });
+    this.setState({ panes, activeKey });
+  };
+
+  remove = targetKey => {
+    let { activeKey } = this.state;
+    let lastIndex;
+    this.state.panes.forEach((pane, i) => {
+      if (pane.key === targetKey) {
+        lastIndex = i - 1;
+      }
+    });
+    const panes = this.state.panes.filter(pane => pane.key !== targetKey);
+    if (panes.length && activeKey === targetKey) {
+      if (lastIndex >= 0) {
+        activeKey = panes[lastIndex].key;
+      } else {
+        activeKey = panes[0].key;
+      }
+    }
+    this.setState({ panes, activeKey });
+  };
+
 
    loginout=()=>{
      //退出登录，清除session
@@ -99,7 +137,8 @@ let tag=[]
           let newArr=menuArr.map((item,i)=>{         
               tag.push(item.tag)
             return <Menu.Item key={i+1} icon={icon[item.icon]}>
-            <NavLink to={item.path}>{item.name}</NavLink>
+            <NavLink to={item.path} onClick={()=>{this.add(item.name,item.path)
+            }}>{item.name}</NavLink>
             </Menu.Item>
           })
         return (
@@ -109,11 +148,6 @@ let tag=[]
       <div className="logo" >
         <span>宿舍管理系统</span>
       </div>
-      {/* <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
-      </Menu> */}
       <Dropdown overlay={users}>
     <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
     {this.context.userInfo.name || this.context.userInfo.stuName} <DownOutlined />
@@ -153,6 +187,23 @@ let tag=[]
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb> */}
         <div className="underline">
+        {/* <div style={{ marginBottom: 16 }}>
+          <Button onClick={this.add}>ADD</Button>
+        </div> */}
+        <Tabs
+          hideAdd
+          onChange={this.onChange}
+          activeKey={this.state.activeKey}
+          type="editable-card"
+          onEdit={this.onEdit}
+          // tabPosition="bottom"
+        >
+          {this.state.panes.map(pane => (
+            <TabPane tab={<NavLink style={{color:'inherit'}} to={pane.path}>{pane.title}</NavLink>} key={pane.key}>
+              {/* {pane.content} */}
+            </TabPane>
+          ))}
+        </Tabs>
         </div>
         <Content
           className="site-layout-background"

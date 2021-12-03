@@ -270,7 +270,7 @@ delNot=(key)=>{
         <Notice showModal={this.showModal} Search={this.Search} notice={this.notice} Nadd={this.Nadd}></Notice>
 
         <div>
-          <Table columns={columns} dataSource={this.state.notice} size="middle" />
+          <Table pagination="bottomLeft" pagination={{defaultPageSize:5}} columns={columns} dataSource={this.state.notice} size="middle" />
         </div>
         <Modal
           width="500px"

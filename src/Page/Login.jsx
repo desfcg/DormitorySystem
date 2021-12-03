@@ -1,8 +1,10 @@
 import React, { Component,Fragment } from 'react'
 import { Input, Space, Button,Radio ,message} from 'antd';
 import './login.css'
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { MyCtx } from '../store/MyContext';
 import { setSessionStorage } from '../Session/Session';
+import ParticlesBg from 'particles-bg';
 
 export default class Login extends Component {
   constructor(){
@@ -65,22 +67,27 @@ this.userLogin()
     })
 }
     render() {
-
+//npm install --save particles-bg 动态粒子背景
         return (
-            <Fragment>
+            <Fragment >
+                      <div>...</div>
+              <ParticlesBg type="cobweb" bg={true} />
+              {/* <div className="background-img"> */}
                 <div className="login">
                   <h2 className="title">宿舍管理系统</h2>
-                <Input name="account" className="put-txt"  placeholder="帐号" onChange={this.handleInputChange}/>
+                <Input prefix={<UserOutlined />} name="account" className="put-txt"  placeholder="帐号" onChange={this.handleInputChange}/>
                 <Space direction="vertical">
-                    <Input.Password name="password" className="put-pwd"  placeholder="密码" onChange={this.handleInputChange}/>
+                    <Input.Password prefix={<LockOutlined />} name="password" className="put-pwd"  placeholder="密码" onChange={this.handleInputChange}/>
                 </Space>
-                <Radio.Group name="identity" onChange={this.handleInputChange} value={this.state.identity}>
-                <Radio  value="学生">学生</Radio>
-                <Radio value="管理员">管理员</Radio>
+                <Radio.Group  name="identity" onChange={this.handleInputChange} value={this.state.identity}>
+                <Radio className="radios" value="学生">学生</Radio>
+                <Radio className="radios" value="管理员">管理员</Radio>
                 </Radio.Group>
                 <div className="btn">
                  <Button className="btn-log" type="primary" onClick={this.login}>登录</Button>                   
-                </div>
+                </div>                
+             {/* </div> */}
+
 {/* <Form
       name="normal_login"
       className="login-form"
