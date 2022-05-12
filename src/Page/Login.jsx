@@ -70,7 +70,6 @@ this.userLogin()
 //npm install --save particles-bg 动态粒子背景
         return (
             <Fragment >
-                      <div>...</div>
               <ParticlesBg type="cobweb" bg={true} />
               {/* <div className="background-img"> */}
                 <div className="login">

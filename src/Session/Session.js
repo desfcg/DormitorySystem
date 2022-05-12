@@ -7,7 +7,7 @@ function setSessionStorage(userInfo,value){
 function getSessionStorage(userInfo){
   return JSON.parse(sessionStorage.getItem(userInfo)) 
 }
-//清除session
+//删除session
 function clearSessionStorage(userInfo){
   return  sessionStorage.removeItem(userInfo)
 }
